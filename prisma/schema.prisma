@@ -16,3 +16,10 @@ model Experience {
   header String
   description String
 }
+
+model File {
+  id Int @id @default(autoincrement())
+  name String
+  path String
+}
+

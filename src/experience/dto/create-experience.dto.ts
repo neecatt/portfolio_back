@@ -1,9 +1,9 @@
-import { IsString } from "class-validator"
+import { IsString } from 'class-validator';
 
 export class CreateExperienceDto {
-    @IsString()
-    header: string
+  @IsString()
+  header: string;
 
-    @IsString()
-    description: string
+  @IsString()
+  description: string;
 }
