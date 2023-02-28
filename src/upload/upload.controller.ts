@@ -15,9 +15,12 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Controller('upload')
 export class UploadController {
+  constructor(private readonly prisma: PrismaService) {}
+
   @Post()
   @UseInterceptors(
     FileInterceptor('file', {
@@ -40,15 +43,29 @@ export class UploadController {
       }),
     }),
   )
-  handleUpload(@UploadedFile() file: Express.Multer.File) {
+  async handleUpload(@UploadedFile() file: Express.Multer.File) {
     try {
+      const uploadedFile = await this.prisma.file.create({
+        data: {
+          name: file.filename,
+          path: file.path,
+          size: file.size,
+          mimetype: file.mimetype,
+        }
+      });
       return {
         filename: file.filename,
-      };
-    } catch (err) {
+        filePath: file.path,
+      }
+      
+    } catch (error) {
       return {
-        error: 'Error uploading file',
-      };
+        error: 'Error uploading file'
+      }
+      
     }
-  }
+
+    
+    }
+  
 }
