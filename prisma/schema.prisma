@@ -84,4 +84,6 @@ model File {
   id   Int    @id @default(autoincrement())
   name String
   path String
+  size Int
+  mimetype String
 }
