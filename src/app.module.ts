@@ -6,6 +6,7 @@ import { ExperienceModule } from './experience/experience.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UploadModule } from './upload/upload.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { DownloadModule } from './download/download.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { MulterModule } from '@nestjs/platform-express';
     MulterModule.register({
       dest: './files',
     }),
+    DownloadModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
