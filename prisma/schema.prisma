@@ -10,18 +10,80 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Experience {
-  id Int @id @default(autoincrement())
-  header String
+  id          Int      @id @default(autoincrement())
+  title       String
   description String
+  dateStarted DateTime
+  dateEnded   DateTime
+  company     String
+  location    String
+  current     Boolean
+}
+
+model Education {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  dateStarted DateTime
+  dateEnded   DateTime
+  school      String
+  location    String
+  current     Boolean
+}
+
+model Projects {
+  id          Int     @id @default(autoincrement())
+  title       String
+  info        String
+  description String
+  github      String
+  website     String?
+}
+
+model ProgLanguages {
+  id     Int      @id @default(autoincrement())
+  name   String
+  Skills Skills[]
+}
+
+model Frameworks {
+  id     Int      @id @default(autoincrement())
+  name   String
+  Skills Skills[]
+}
+
+model Databases {
+  id     Int      @id @default(autoincrement())
+  name   String
+  Skills Skills[]
+}
+
+model Tools {
+  id     Int      @id @default(autoincrement())
+  name   String
+  Skills Skills[]
+}
+
+model Languages {
+  id     Int      @id @default(autoincrement())
+  name   String
+  Skills Skills[]
+}
+
+model Skills {
+  id            Int             @id @default(autoincrement())
+  progLanguages ProgLanguages[]
+  frameworks    Frameworks[]
+  databases     Databases[]
+  tools         Tools[]
+  languages     Languages[]
 }
 
 model File {
-  id Int @id @default(autoincrement())
+  id   Int    @id @default(autoincrement())
   name String
   path String
   size Int
   mimetype String
 }
-
