@@ -21,6 +21,7 @@ export class UploadService {
     }
   }
 
+
   async createFile(file: Express.Multer.File) : Promise<any> {
     const { filename } = file;
 
@@ -42,6 +43,7 @@ export class UploadService {
     });
     return createFile;
   }
+
 
   async getFilename(): Promise<string> {
     const file = await this.prisma.file.findFirst();
