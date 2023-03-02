@@ -8,6 +8,7 @@ import { UploadModule } from './upload/upload.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { UploadMiddleware } from './upload/upload.middleware';
 import { UploadService } from './upload/upload.service';
+import { DownloadModule } from './download/download.module';
 
 @Module({
   imports: [
