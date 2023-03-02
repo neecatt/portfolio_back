@@ -51,21 +51,16 @@ export class UploadController {
           path: file.path,
           size: file.size,
           mimetype: file.mimetype,
-        }
+        },
       });
       return {
         filename: file.filename,
         filePath: file.path,
-      }
-      
+      };
     } catch (error) {
       return {
-        error: 'Error uploading file'
-      }
-      
+        error: 'Error uploading file',
+      };
     }
-
-    
-    }
-  
+  }
 }

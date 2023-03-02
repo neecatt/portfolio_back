@@ -4,7 +4,6 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ExperienceController } from './experience.controller';
 
-
 @Module({
   imports: [PrismaModule],
   controllers: [ExperienceController],

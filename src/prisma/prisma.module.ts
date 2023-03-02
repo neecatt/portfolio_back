@@ -1,8 +1,4 @@
 import { Module } from '@nestjs/common';
 
 @Module({})
-export class PrismaModule {
-
-
-}
- 
+export class PrismaModule {}
