@@ -1,12 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Res,
+} from '@nestjs/common';
 import { UploadService } from 'src/upload/upload.service';
 import { DownloadService } from './download.service';
 import { Response } from 'express';
 
-
 @Controller('download')
 export class DownloadController {
-  constructor(private readonly downloadService: DownloadService, private readonly uploadService: UploadService) {}
+  constructor(
+    private readonly downloadService: DownloadService,
+    private readonly uploadService: UploadService,
+  ) {}
 
   @Get(':filename')
   async downloadFile(
@@ -21,5 +32,8 @@ export class DownloadController {
     fileStream.pipe(res);
   }
 
-
+  @Get('')
+  async getFileName(): Promise<string> {
+    return await this.downloadService.getFileName();
+  }
 }
