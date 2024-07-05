@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Experience } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateExperienceDto } from './dto/create-experience.dto';
@@ -11,12 +11,8 @@ export class ExperienceService {
   async createExperience(
     createExperienceDto: CreateExperienceDto,
   ): Promise<Experience> {
-    const { header, description } = createExperienceDto;
     return await this.prisma.experience.create({
-      data: {
-        header,
-        description,
-      },
+      data: createExperienceDto,
     });
   }
 
@@ -37,10 +33,9 @@ export class ExperienceService {
   }
 
   async update(id: number, updateExperienceDto: UpdateExperienceDto) {
-    const { header, description } = updateExperienceDto;
     const foundExperience = await this.prisma.experience.findUnique({
       where: {
-        id: id,
+        id,
       },
     });
     if (!foundExperience) {
@@ -51,10 +46,7 @@ export class ExperienceService {
       where: {
         id: id,
       },
-      data: {
-        header,
-        description,
-      },
+      data: updateExperienceDto,
     });
   }
 
