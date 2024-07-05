@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,14 +8,12 @@ datasource db {
 }
 
 model Experience {
-  id          Int      @id @default(autoincrement())
-  title       String
+  id          Int     @id @default(autoincrement())
+  jobTitle    String
+  companyName String
+  date        String
   description String
-  dateStarted DateTime
-  dateEnded   DateTime
-  company     String
-  location    String
-  current     Boolean
+  latest      Boolean
 }
 
 model Education {
@@ -33,57 +28,16 @@ model Education {
 }
 
 model Projects {
-  id          Int     @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   title       String
-  info        String
   description String
-  github      String
-  website     String?
+  githubLink  String?
+  websiteLink String?
+  techStack   TechStack[]
 }
 
-model ProgLanguages {
-  id     Int      @id @default(autoincrement())
-  name   String
-  Skills Skills[]
-}
-
-model Frameworks {
-  id     Int      @id @default(autoincrement())
-  name   String
-  Skills Skills[]
-}
-
-model Databases {
-  id     Int      @id @default(autoincrement())
-  name   String
-  Skills Skills[]
-}
-
-model Tools {
-  id     Int      @id @default(autoincrement())
-  name   String
-  Skills Skills[]
-}
-
-model Languages {
-  id     Int      @id @default(autoincrement())
-  name   String
-  Skills Skills[]
-}
-
-model Skills {
-  id            Int             @id @default(autoincrement())
-  progLanguages ProgLanguages[]
-  frameworks    Frameworks[]
-  databases     Databases[]
-  tools         Tools[]
-  languages     Languages[]
-}
-
-model File {
-  id   Int    @id @default(autoincrement())
-  name String
-  path String
-  size Int
-  mimetype String
+model TechStack {
+  id       Int        @id @default(autoincrement())
+  name     String     @unique
+  projects Projects[]
 }
