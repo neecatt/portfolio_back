@@ -1,5 +1,4 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Experience } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateExperienceDto } from './dto/create-experience.dto';
 import { UpdateExperienceDto } from './dto/update-experience.dto';
@@ -8,9 +7,7 @@ import { UpdateExperienceDto } from './dto/update-experience.dto';
 export class ExperienceService {
   constructor(private prisma: PrismaService) {}
 
-  async createExperience(
-    createExperienceDto: CreateExperienceDto,
-  ): Promise<Experience> {
+  async createExperience(createExperienceDto: CreateExperienceDto) {
     return await this.prisma.experience.create({
       data: createExperienceDto,
     });
