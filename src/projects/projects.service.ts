@@ -63,22 +63,25 @@ export class ProjectsService {
   async update(id: number, updateProjectDto: UpdateProjectDto) {
     const { techStack, ...projectData } = updateProjectDto;
 
-    const existingTechStack = await this.prisma.techStack.findMany({
-      where: {
-        name: {
-          in: techStack,
+    let techStackData = [];
+    if (techStack) {
+      const existingTechStack = await this.prisma.techStack.findMany({
+        where: {
+          name: {
+            in: techStack,
+          },
         },
-      },
-    });
+      });
 
-    const existingTechStackMap = new Map(
-      existingTechStack.map((item) => [item.name, item.id]),
-    );
+      const existingTechStackMap = new Map(
+        existingTechStack.map((item) => [item.name, item.id]),
+      );
 
-    const techStackData = techStack.map((name) => ({
-      where: { id: existingTechStackMap.get(name) || undefined, name },
-      create: { name },
-    }));
+      techStackData = techStack.map((name) => ({
+        where: { id: existingTechStackMap.get(name) || undefined, name },
+        create: { name },
+      }));
+    }
 
     return await this.prisma.projects.update({
       where: {
@@ -86,9 +89,11 @@ export class ProjectsService {
       },
       data: {
         ...projectData,
-        techStack: {
-          connectOrCreate: techStackData,
-        },
+        ...(techStack && {
+          techStack: {
+            connectOrCreate: techStackData,
+          },
+        }),
       },
     });
   }
