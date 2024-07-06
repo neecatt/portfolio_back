@@ -5,7 +5,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: '*',
   });
   const logger = new Logger('Info');
   logger.log(`Application listening on port 3000`);
