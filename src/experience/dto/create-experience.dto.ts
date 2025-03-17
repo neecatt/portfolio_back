@@ -1,4 +1,4 @@
-import { IsBoolean, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsString } from 'class-validator';
 
 export class CreateExperienceDto {
   @IsString()
@@ -10,9 +10,13 @@ export class CreateExperienceDto {
   @IsString()
   date: string;
 
-  @IsString()
-  description: string;
+  @IsArray()
+  @IsString({ each: true })
+  description: string[];
 
   @IsBoolean()
   latest: boolean;
+
+  @IsString()
+  category: string;
 }

@@ -5,7 +5,7 @@ import { UpdateExperienceDto } from './dto/update-experience.dto';
 
 @Injectable()
 export class ExperienceService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async createExperience(createExperienceDto: CreateExperienceDto) {
     return await this.prisma.experience.create({
