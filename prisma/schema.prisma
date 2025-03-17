@@ -12,7 +12,7 @@ model Experience {
   jobTitle    String
   companyName String
   date        String
-  description String
+  description String[]
   latest      Boolean
 }
 
@@ -34,6 +34,7 @@ model Projects {
   githubLink  String?
   websiteLink String?
   techStack   TechStack[]
+  category    String @default("AI")
 }
 
 model TechStack {
@@ -41,3 +42,4 @@ model TechStack {
   name     String     @unique
   projects Projects[]
 }
+
