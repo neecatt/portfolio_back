@@ -16,7 +16,7 @@ import { UpdateExperienceDto } from './dto/update-experience.dto';
 export class ExperienceController {
   constructor(private readonly experienceService: ExperienceService) {}
 
-  @Post('create')
+  @Post('')
   createExperience(@Body() createExperienceDto: CreateExperienceDto) {
     return this.experienceService.createExperience(createExperienceDto);
   }
@@ -36,7 +36,7 @@ export class ExperienceController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateExperienceDto: UpdateExperienceDto,
   ) {
-    return this.experienceService.update(+id, updateExperienceDto);
+    return this.experienceService.update(id, updateExperienceDto);
   }
 
   @Delete(':id')
