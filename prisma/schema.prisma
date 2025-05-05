@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,9 +7,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Experience {
-  id Int @id @default(autoincrement())
-  header String
-  description String
+  id          Int     @id @default(autoincrement())
+  jobTitle    String
+  companyName String
+  date        String
+  description String[]
+  latest      Boolean
 }
+
+model Education {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  dateStarted DateTime
+  dateEnded   DateTime
+  school      String
+  location    String
+  current     Boolean
+}
+
+model Projects {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  githubLink  String?
+  websiteLink String?
+  techStack   TechStack[]
+  category    String @default("AI")
+}
+
+model TechStack {
+  id       Int        @id @default(autoincrement())
+  name     String     @unique
+  projects Projects[]
+}
+
+model Resume {
+  id          Int        @id @default(autoincrement())
+  link        String
+}
+

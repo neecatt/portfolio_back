@@ -1,9 +1,22 @@
-import { IsString } from "class-validator"
+import { IsArray, IsBoolean, IsString } from 'class-validator';
 
 export class CreateExperienceDto {
-    @IsString()
-    header: string
+  @IsString()
+  jobTitle: string;
 
-    @IsString()
-    description: string
+  @IsString()
+  companyName: string;
+
+  @IsString()
+  date: string;
+
+  @IsArray()
+  @IsString({ each: true })
+  description: string[];
+
+  @IsBoolean()
+  latest: boolean;
+
+  @IsString()
+  category: string;
 }
