@@ -14,6 +14,9 @@ model Experience {
   date        String
   description String[]
   latest      Boolean
+  sortOrder   Int     @default(0)
+  technologies String[] @default([])
+  companyLink String?
 }
 
 model Education {
@@ -35,6 +38,27 @@ model Projects {
   websiteLink String?
   techStack   TechStack[]
   category    String @default("AI")
+  slug        String @unique @default("untitled-project")
+  featured    Boolean @default(false)
+  published   Boolean @default(true)
+  sortOrder   Int @default(0)
+  role        String?
+  challenge   String?
+  solution    String?
+  outcomes    String[] @default([])
+  metrics     Json?
+  thumbnail   String?
+  media       ProjectMedia[]
+}
+
+model ProjectMedia {
+  id        Int      @id @default(autoincrement())
+  projectId Int
+  key       String
+  altText   String   @default("")
+  sortOrder Int      @default(0)
+  kind      String   @default("image")
+  project   Projects @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
 model TechStack {
@@ -48,3 +72,14 @@ model Resume {
   link        String
 }
 
+model Profile {
+  id             Int      @id @default(1)
+  name           String   @default("Nijat Abdullazada")
+  headline       String   @default("Software & ML/AI Engineer")
+  intro          String   @default("")
+  availability   String   @default("")
+  skills         String[] @default([])
+  socials        Json?
+  seoTitle       String?
+  seoDescription String?
+}
