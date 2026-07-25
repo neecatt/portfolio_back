@@ -9,7 +9,6 @@ export class ProjectsService {
 
   async create(createProjectDto: CreateProjectDto) {
     const { techStack, ...projectData } = createProjectDto;
-    const slug = projectData.slug || projectData.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `project-${Date.now()}`;
 
     const existingTechStack = await this.prisma.techStack.findMany({
       where: {
@@ -31,7 +30,6 @@ export class ProjectsService {
     return await this.prisma.projects.create({
       data: {
         ...projectData,
-        slug,
         techStack: {
           connectOrCreate: techStackData,
         },
@@ -43,9 +41,7 @@ export class ProjectsService {
     return await this.prisma.projects.findMany({
       include: {
         techStack: true,
-        media: { orderBy: { sortOrder: 'asc' } },
       },
-      orderBy: [{ sortOrder: 'asc' }, { featured: 'desc' }, { id: 'desc' }],
     });
   }
 
@@ -56,7 +52,6 @@ export class ProjectsService {
       },
       include: {
         techStack: true,
-        media: { orderBy: { sortOrder: 'asc' } },
       },
     });
     if (!existingProject) {
@@ -66,12 +61,7 @@ export class ProjectsService {
   }
 
   async update(id: number, updateProjectDto: UpdateProjectDto) {
-    // `id` and `media` can be present when the admin edits a record returned
-    // by the API, but both are read-only relation/output fields for Prisma.
-    const { techStack, media, id: _ignoredId, ...projectData } = updateProjectDto as UpdateProjectDto & {
-      media?: unknown;
-      id?: number;
-    };
+    const { techStack, ...projectData } = updateProjectDto;
 
     let techStackData = [];
     if (techStack) {
@@ -101,7 +91,6 @@ export class ProjectsService {
         ...projectData,
         ...(techStack && {
           techStack: {
-            set: techStack.map((name) => ({ name })),
             connectOrCreate: techStackData,
           },
         }),
@@ -127,13 +116,5 @@ export class ProjectsService {
     });
 
     return project;
-  }
-
-  addMedia(projectId: number, data: { key: string; altText?: string; kind?: string; sortOrder?: number }) {
-    return this.prisma.projectMedia.create({ data: { projectId, ...data } });
-  }
-
-  removeMedia(id: number) {
-    return this.prisma.projectMedia.delete({ where: { id } });
   }
 }
