@@ -1,4 +1,4 @@
-import { IsArray, IsString } from 'class-validator';
+import { IsArray, IsOptional, IsString } from 'class-validator';
 
 export class CreateProjectDto {
   @IsString()
@@ -7,12 +7,19 @@ export class CreateProjectDto {
   @IsString()
   description: string;
 
+  @IsOptional()
   @IsString()
   githubLink?: string;
 
+  @IsOptional()
   @IsString()
   websiteLink?: string;
 
-  @IsArray({ each: true })
+  @IsOptional()
+  @IsString()
+  category?: string;
+
+  @IsArray()
+  @IsString({ each: true })
   techStack: string[];
 }
