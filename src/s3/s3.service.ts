@@ -7,14 +7,13 @@ export class S3Service {
   private readonly s3: AWS.S3;
 
   constructor() {
-    const config: AWS.S3.ClientConfiguration = {
+    this.s3 = new AWS.S3({
+      endpoint: new AWS.Endpoint(process.env.AWS_ENDPOINT),
       accessKeyId: process.env.S3_ACCESS_KEY_ID,
       secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
       region: 'auto',
       signatureVersion: 'v4',
-    };
-    if (process.env.AWS_ENDPOINT) config.endpoint = new AWS.Endpoint(process.env.AWS_ENDPOINT);
-    this.s3 = new AWS.S3(config);
+    });
   }
 
   async generatePresignedUrl(filename: string, contentType: string) {

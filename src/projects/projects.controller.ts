@@ -43,14 +43,4 @@ export class ProjectsController {
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.projectsService.remove(id);
   }
-
-  @Post(':id/media')
-  addMedia(@Param('id', ParseIntPipe) id: number, @Body() body: { key: string; altText?: string; kind?: string; sortOrder?: number }) {
-    return this.projectsService.addMedia(id, body);
-  }
-
-  @Delete(':id/media/:mediaId')
-  removeMedia(@Param('mediaId', ParseIntPipe) mediaId: number) {
-    return this.projectsService.removeMedia(mediaId);
-  }
 }

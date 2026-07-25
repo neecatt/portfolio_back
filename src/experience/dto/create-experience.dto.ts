@@ -1,4 +1,4 @@
-import { IsArray, IsBoolean, IsInt, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsString } from 'class-validator';
 
 export class CreateExperienceDto {
   @IsString()
@@ -17,7 +17,6 @@ export class CreateExperienceDto {
   @IsBoolean()
   latest: boolean;
 
-  @IsOptional() @IsInt() sortOrder?: number;
-  @IsOptional() @IsArray() @IsString({ each: true }) technologies?: string[];
-  @IsOptional() @IsString() companyLink?: string;
+  @IsString()
+  category: string;
 }

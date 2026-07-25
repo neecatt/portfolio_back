@@ -14,7 +14,7 @@ export class ExperienceService {
   }
 
   async findAll() {
-    return await this.prisma.experience.findMany({ orderBy: [{ sortOrder: 'asc' }, { id: 'desc' }] });
+    return await this.prisma.experience.findMany();
   }
 
   async findOne(id: number) {
