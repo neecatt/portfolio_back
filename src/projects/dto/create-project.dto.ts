@@ -1,4 +1,4 @@
-import { IsArray, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsInt, IsOptional, IsString, IsUrl } from 'class-validator';
 
 export class CreateProjectDto {
   @IsString()
@@ -7,12 +7,26 @@ export class CreateProjectDto {
   @IsString()
   description: string;
 
-  @IsString()
+  @IsOptional()
+  @IsUrl()
   githubLink?: string;
 
-  @IsString()
+  @IsOptional()
+  @IsUrl()
   websiteLink?: string;
 
-  @IsArray({ each: true })
+  @IsArray()
+  @IsString({ each: true })
   techStack: string[];
+
+  @IsOptional() @IsString() category?: string;
+  @IsOptional() @IsString() slug?: string;
+  @IsOptional() @IsBoolean() featured?: boolean;
+  @IsOptional() @IsBoolean() published?: boolean;
+  @IsOptional() @IsInt() sortOrder?: number;
+  @IsOptional() @IsString() role?: string;
+  @IsOptional() @IsString() challenge?: string;
+  @IsOptional() @IsString() solution?: string;
+  @IsOptional() @IsArray() @IsString({ each: true }) outcomes?: string[];
+  @IsOptional() @IsString() thumbnail?: string;
 }

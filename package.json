@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "vercel-build": "prisma generate && npm run build",
     "start:together": "concurrently \"cd ../portfolio-front && npm run dev\" \"cd ../portfolio-back && npm run start:dev\" ",
     "tst": "cd .. & cd .. & ls",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

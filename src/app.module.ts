@@ -7,6 +7,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ProjectsModule } from './projects/projects.module';
 import { ResumeModule } from './resume/resume.module';
 import { S3Module } from './s3/s3.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { S3Module } from './s3/s3.module';
     ProjectsModule,
     ResumeModule,
     S3Module,
+    ProfileModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

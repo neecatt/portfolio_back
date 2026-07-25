@@ -71,3 +71,16 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Deploy the API to Vercel
+
+Set the Vercel project Root Directory to `portfolio-back` when deploying from the parent portfolio repository. If the backend repository is connected directly, leave Root Directory as `.`.
+
+Use these project settings:
+
+- Framework Preset: `Other` or automatically detected NestJS
+- Build Command: `npm run vercel-build`
+- Output Directory: leave empty; do not use `public` or `dist`
+- Install Command: `npm ci`
+
+Required environment variables include `DATABASE_URL`, plus the S3/R2 variables if media uploads are enabled. Apply Prisma migrations to the hosted database before using the API.

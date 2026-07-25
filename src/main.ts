@@ -9,7 +9,7 @@ async function bootstrap() {
   });
   const logger = new Logger('Info');
   logger.log(`Application listening on port 3000`);
-  await app.listen(3000);
+  await app.listen(process.env.PORT ?? 3000);
   app.useGlobalPipes(new ValidationPipe());
 }
 
